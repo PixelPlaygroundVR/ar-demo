@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cyberpunk AR Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <!-- VT323 gives you that true Matrix vibe -->
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <style>
+    /* Global styles: dark background, zero margins */
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000;
+    }
+    /* Matrix Digital Rain Canvas */
+    #matrix {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+    /* Neon overlay instructions with that futuristic glitch */
+    #overlay {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      z-index: 2;
+      color: #0F0;
+      font-family: 'VT323', monospace;
+      text-shadow: 0 0 5px #0F0, 0 0 10px #0F0;
+    }
+    /* Our AR viewer takes center stage */
+    model-viewer {
+      position: relative;
+      z-index: 1;
+      width: 100vw;
+      height: 100vh;
+      background: transparent;
+    }
+  </style>
+</head>
+<body>
+  <!-- The digital rain that would make Neo proud -->
+  <canvas id="matrix"></canvas>
+  
+  <!-- Overlay: instructions in bold neon letters -->
+  <div id="overlay">
+    <h1>Welcome to the Cyberpunk Studio</h1>
+    <p>Tap the AR icon, scan your room, and step into your futuristic domain.</p>
+  </div>
+  
+  <!-- The AR element: works flawlessly on iPhone via AR Quick Look -->
+  <model-viewer id="ar-viewer"
+    src="https://example.com/cyberpunk-studio.glb"         <!-- Replace with your GLB model URL -->
+    ios-src="https://example.com/cyberpunk-studio.usdz"     <!-- Replace with your USDZ model URL -->
+    alt="Cyberpunk Studio"
+    ar
+    ar-modes="scene-viewer quick-look"
+    ar-scale="auto"
+    environment-image="neutral"
+    auto-rotate
+    camera-controls>
+  </model-viewer>
+  
+  <!-- Load model-viewer library -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  
+  <script>
+    /* MATRIX DIGITAL RAIN EFFECT */
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const fontSize = 16;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#0F0';
+      ctx.font = fontSize + 'px monospace';
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 33);
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
