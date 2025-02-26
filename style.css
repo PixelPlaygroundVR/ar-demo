@@ -1,35 +1,88 @@
-/* Global styles */
+/* Global Styles */
 body {
-    background-color: #000;
-    color: #0f0;
-    font-family: 'Courier New', monospace;
     margin: 0;
     padding: 0;
-    line-height: 1.6;
+    background-color: #0a0a0a;
+    font-family: 'Courier New', monospace;
+    overflow-x: hidden;
+    color: #00ff00;
+    position: relative;
 }
 
-h1, h2 {
+/* Fullscreen Canvas for Code Rain */
+#codeRain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: #000;
+}
+
+/* Holographic Overlay with Gradient Animation */
+#holoOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
     text-align: center;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(45deg, rgba(0,255,0,0.1), rgba(0,255,255,0.1));
+    animation: pulse 3s infinite alternate;
+}
+
+@keyframes pulse {
+    from { opacity: 0.8; }
+    to { opacity: 1; }
+}
+
+/* Header & Main Content */
+header, main {
+    position: relative;
+    z-index: 2;
+    padding: 1rem;
+}
+
+/* Section Styling */
+section {
+    margin: 1rem auto;
+    padding: 1rem;
+    border: 1px solid #00ffff;
+    max-width: 600px;
+    background-color: rgba(10,10,10,0.9);
+    box-shadow: 0 0 15px #00ffff;
+}
+
+/* Title Glitch Effect */
+h1, h2 {
+    position: relative;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
-
-/* Layout */
-main {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding: 1rem;
+h1::before, h1::after,
+h2::before, h2::after {
+    content: attr(class);
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.7;
+    color: #00ffff;
+    clip: rect(0, 900px, 0, 0);
+    animation: glitch 2s infinite;
+}
+@keyframes glitch {
+    0% { clip: rect(2px, 9999px, 1px, 0); }
+    20% { clip: rect(10px, 9999px, 15px, 0); }
+    40% { clip: rect(20px, 9999px, 3px, 0); }
+    60% { clip: rect(30px, 9999px, 20px, 0); }
+    80% { clip: rect(5px, 9999px, 10px, 0); }
+    100% { clip: rect(2px, 9999px, 1px, 0); }
 }
 
-section {
-    padding: 1rem;
-    border: 1px solid #0ff;
-    margin: 0 auto;
-    max-width: 600px;
-}
-
-/* Deals & Packages containers */
+/* Containers for Deals and Packages */
 .deals-container, .packages-container {
     display: flex;
     flex-wrap: wrap;
@@ -37,47 +90,80 @@ section {
     gap: 1rem;
 }
 
-/* Deal card styles */
+/* Card Styles */
 .deal-card, .package-card {
     background-color: #111;
-    border: 1px solid #0f0;
+    border: 1px solid #00ff00;
     padding: 1rem;
-    flex: 1 1 250px;
-    max-width: 280px;
-    box-shadow: 0 0 10px #0ff;
+    width: 260px;
+    box-shadow: 0 0 10px #00ffff;
+    transition: transform 0.3s ease;
+}
+.deal-card:hover, .package-card:hover {
+    transform: scale(1.05);
 }
 
+/* Card Images */
 .deal-card img, .package-card img {
     width: 100%;
     display: block;
+    margin-bottom: 0.5rem;
 }
 
-/* Order form styles */
-#orderForm {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-#orderForm label {
-    margin-top: 0.5rem;
-}
-
-#orderForm input, #orderForm select, #orderForm button {
-    padding: 0.5rem;
-    border: 1px solid #0ff;
-    background-color: #000;
-    color: #0f0;
-}
-
-#orderForm button {
-    cursor: pointer;
-    background-color: #0f0;
+/* Button Styling with Pulsing Glow */
+button, .ar-btn {
+    background-color: #00ff00;
     color: #000;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    margin-top: 0.5rem;
+    transition: background-color 0.3s ease, transform 0.2s;
+    animation: glow 2s infinite alternate;
+}
+button:hover, .ar-btn:hover {
+    background-color: #00ffff;
+    transform: scale(1.1);
+}
+@keyframes glow {
+    from { box-shadow: 0 0 5px #00ff00; }
+    to { box-shadow: 0 0 20px #00ffff; }
 }
 
-#orderForm button:hover {
-    background-color: #0ff;
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+.modal-content {
+    background-color: #0a0a0a;
+    padding: 2rem;
+    border: 2px solid #00ff00;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+}
+.close-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #00ff00;
+}
+
+/* Responsive adjustments for iPhone 16 Pro Max (logical width ~430px) */
+@media (max-width: 430px) {
+    section {
+        max-width: 95%;
+    }
 } 

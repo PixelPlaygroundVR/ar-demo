@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pixel Playgrounds</title>
+    <title>Pixel Syndicate</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <!-- PWA iOS support -->
@@ -11,45 +11,59 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 </head>
 <body>
+    <!-- Fullscreen canvas for Matrix-style code rain -->
+    <canvas id="codeRain"></canvas>
+    
+    <!-- Holographic overlay with gradient animation -->
+    <div id="holoOverlay">
+        <h1>Pixel Syndicate</h1>
+    </div>
+
     <header>
-        <h1>Pixel Playgrounds</h1>
+        <!-- (Optional header content if needed) -->
     </header>
     
     <main>
+        <!-- Deals Section -->
         <section id="deals">
-            <h2>Hot Tech Deals</h2>
+            <h2>Tech Deals</h2>
             <div class="deals-container">
-                <!-- Deals will be injected here -->
+                <!-- Deal cards will be injected here -->
             </div>
         </section>
         
+        <!-- Packages Section -->
         <section id="packages">
             <h2>Exclusive Packages</h2>
             <div class="packages-container">
-                <!-- Packages will be injected here -->
+                <!-- Package cards will be injected here -->
             </div>
         </section>
-        
-        <section id="order">
-            <h2>Order Your Package</h2>
+    </main>
+    
+    <!-- Order Modal -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Place Your Order</h2>
             <form id="orderForm">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <label for="orderName">Name:</label>
+                <input type="text" id="orderName" required>
                 
-                <label for="packageSelect">Select Package:</label>
-                <select id="packageSelect" name="packageSelect" required>
-                    <option value="">--Choose a Package--</option>
-                    <!-- Package options will be populated dynamically -->
+                <label for="orderEmail">Email:</label>
+                <input type="email" id="orderEmail" required>
+                
+                <label for="orderPackage">Select Package:</label>
+                <select id="orderPackage" required>
+                    <option value="">--Select a Package--</option>
+                    <!-- Options will be populated dynamically -->
                 </select>
                 
                 <button type="submit">Submit Order</button>
             </form>
-        </section>
-    </main>
-
+        </div>
+    </div>
+    
     <script src="script.js"></script>
 </body>
 </html> 

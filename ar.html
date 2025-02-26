@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Pixel Syndicate AR</title>
+  <!-- Load A-Frame from CDN -->
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- A-Frame Scene for AR Visualization -->
+  <a-scene embedded vr-mode-ui="enabled: false">
+    <a-assets>
+      <!-- Preload default model -->
+      <a-asset-item id="defaultModel" src="models/vr-headset.glb"></a-asset-item>
+    </a-assets>
+
+    <!-- Neon Green Grid Floor with Pulsing Animation -->
+    <a-plane id="gridFloor" position="0 0 0" rotation="-90 0 0" width="10" height="10" color="#00ff00" 
+             material="opacity:0.5; transparent:true"></a-plane>
+
+    <!-- 3D Model Display: Will be updated based on URL parameter "model" -->
+    <a-entity id="modelEntity" position="0 0 -2" rotation="0 0 0" scale="1 1 1"
+              gltf-model="url(models/vr-headset.glb)"></a-entity>
+
+    <!-- Interactive Holographic Assistant -->
+    <a-sphere id="assistant" position="0 1.5 -1" radius="0.2" color="#00ffff" opacity="0.8"></a-sphere>
+    <a-text id="assistantText" value="Hello, Syndicate" 
+            position="0 1.8 -1" align="center" color="#00ff00"></a-text>
+
+    <!-- Camera Entity -->
+    <a-entity camera look-controls position="0 1.6 0"></a-entity>
+  </a-scene>
+  
+  <!-- Jack Out link back to main page -->
+  <div id="jackOut">
+    <a href="index.html">Jack Out</a>
+  </div>
+  
+  <script>
+    // Read URL parameter to determine which model to load
+    const urlParams = new URLSearchParams(window.location.search);
+    const modelParam = urlParams.get('model') || 'models/vr-headset.glb';
+    const modelEntity = document.getElementById('modelEntity');
+    modelEntity.setAttribute('gltf-model', 'url(' + modelParam + ')');
+
+    // Setup interactive assistant that changes text on click
+    const assistant = document.getElementById('assistant');
+    const assistantText = document.getElementById('assistantText');
+    assistant.addEventListener('click', () => {
+      const messages = ["Ready to hack?", "Syndicate online!", "Access granted", "Welcome back!"];
+      const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+      assistantText.setAttribute('value', randomMsg);
+    });
+
+    // Pulse animation for grid floor (using A-Frame animation component)
+    const gridFloor = document.getElementById('gridFloor');
+    gridFloor.setAttribute('animation', {
+      property: 'scale',
+      dir: 'alternate',
+      dur: 1000,
+      easing: 'easeInOutSine',
+      loop: true,
+      to: '1.1 1.1 1'
+    });
+  </script>
+</body>
+</html> 
