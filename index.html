@@ -1,162 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Cyberpunk AR Studio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <!-- VT323 font for that classic Matrix vibe -->
-  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background: #000;
-      font-family: 'VT323', monospace;
-    }
-    /* Matrix digital rain background */
-    #matrix {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      pointer-events: none;
-    }
-    /* Custom AR activation button */
-    #ar-button {
-      position: fixed;
-      bottom: 50px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 20px 40px;
-      font-size: 24px;
-      background-color: #0F0;
-      color: #000;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      z-index: 11;
-      box-shadow: 0 0 20px rgba(0,255,0,0.7);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { transform: translateX(-50%) scale(1); }
-      50% { transform: translateX(-50%) scale(1.1); }
-      100% { transform: translateX(-50%) scale(1); }
-    }
-    /* Hypnotic animation overlay */
-    #animation-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: radial-gradient(circle, rgba(0,255,0,0.8) 0%, rgba(0,0,0,0.9) 70%);
-      z-index: 10;
-      display: none;
-      animation: hypnotic 2s linear;
-      opacity: 1;
-    }
-    @keyframes hypnotic {
-      0% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.2) rotate(180deg); }
-      100% { transform: scale(1) rotate(360deg); }
-    }
-    /* Hide built-in AR button from model-viewer */
-    model-viewer::part(ar-button) {
-      display: none;
-    }
-    /* Full-screen model-viewer (needed for AR Quick Look) */
-    model-viewer {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 1;
-      background: transparent;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Playgrounds</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <!-- PWA iOS support -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 </head>
 <body>
-  <!-- Matrix digital rain background -->
-  <canvas id="matrix"></canvas>
-  
-  <!-- Hypnotic overlay animation -->
-  <div id="animation-overlay"></div>
-  
-  <!-- Custom AR activation button -->
-  <button id="ar-button">Activate VR Scanner</button>
-  
-  <!-- The AR element using model-viewer (works flawlessly on iPhone via AR Quick Look) -->
-  <model-viewer id="ar-viewer"
-    src="https://example.com/cyberpunk-studio.glb"         <!-- Replace with your GLB model URL -->
-    ios-src="https://example.com/cyberpunk-studio.usdz"     <!-- Replace with your USDZ model URL -->
-    alt="Cyberpunk Studio"
-    ar
-    ar-modes="quick-look"
-    ar-scale="auto"
-    environment-image="neutral"
-    auto-rotate
-    camera-controls>
-  </model-viewer>
-  
-  <!-- Load the model-viewer library -->
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-  
-  <script>
-    // MATRIX digital rain effect
-    const canvas = document.getElementById('matrix');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    const fontSize = 16;
-    const columns = Math.floor(canvas.width / fontSize);
-    const drops = Array(columns).fill(1);
+    <header>
+        <h1>Pixel Playgrounds</h1>
+    </header>
     
-    function drawMatrix() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#0F0';
-      ctx.font = fontSize + 'px monospace';
-      for (let i = 0; i < drops.length; i++) {
-        const text = letters.charAt(Math.floor(Math.random() * letters.length));
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    }
-    setInterval(drawMatrix, 33);
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
-    
-    // AR activation: on button click, run hypnotic animation then trigger AR Quick Look
-    const arButton = document.getElementById('ar-button');
-    const animationOverlay = document.getElementById('animation-overlay');
-    const modelViewer = document.getElementById('ar-viewer');
-    
-    arButton.addEventListener('click', () => {
-      // Show the hypnotic overlay
-      animationOverlay.style.display = 'block';
-      
-      // After 2 seconds, fade out the overlay
-      setTimeout(() => {
-        animationOverlay.style.transition = 'opacity 1s';
-        animationOverlay.style.opacity = '0';
-        setTimeout(() => {
-          animationOverlay.style.display = 'none';
-          // Trigger AR Quick Look via model-viewer
-          modelViewer.enterAR();
-        }, 1000);
-      }, 2000);
-    });
-  </script>
+    <main>
+        <section id="deals">
+            <h2>Hot Tech Deals</h2>
+            <div class="deals-container">
+                <!-- Deals will be injected here -->
+            </div>
+        </section>
+        
+        <section id="packages">
+            <h2>Exclusive Packages</h2>
+            <div class="packages-container">
+                <!-- Packages will be injected here -->
+            </div>
+        </section>
+        
+        <section id="order">
+            <h2>Order Your Package</h2>
+            <form id="orderForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="packageSelect">Select Package:</label>
+                <select id="packageSelect" name="packageSelect" required>
+                    <option value="">--Choose a Package--</option>
+                    <!-- Package options will be populated dynamically -->
+                </select>
+                
+                <button type="submit">Submit Order</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
 </body>
-</html>
+</html> 

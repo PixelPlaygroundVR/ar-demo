@@ -1,0 +1,83 @@
+/* Global styles */
+body {
+    background-color: #000;
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+h1, h2 {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Layout */
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+section {
+    padding: 1rem;
+    border: 1px solid #0ff;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+/* Deals & Packages containers */
+.deals-container, .packages-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* Deal card styles */
+.deal-card, .package-card {
+    background-color: #111;
+    border: 1px solid #0f0;
+    padding: 1rem;
+    flex: 1 1 250px;
+    max-width: 280px;
+    box-shadow: 0 0 10px #0ff;
+}
+
+.deal-card img, .package-card img {
+    width: 100%;
+    display: block;
+}
+
+/* Order form styles */
+#orderForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#orderForm label {
+    margin-top: 0.5rem;
+}
+
+#orderForm input, #orderForm select, #orderForm button {
+    padding: 0.5rem;
+    border: 1px solid #0ff;
+    background-color: #000;
+    color: #0f0;
+}
+
+#orderForm button {
+    cursor: pointer;
+    background-color: #0f0;
+    color: #000;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#orderForm button:hover {
+    background-color: #0ff;
+} 
