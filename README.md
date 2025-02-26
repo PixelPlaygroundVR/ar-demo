@@ -1,6 +1,4 @@
-Your GitHub README should be a punchy, engaging introduction to your "Pixel Syndicate" web app that reflects its cyberpunk vibe, showcases its coolest features, and provides clear instructions for setup and usage. It should hook visitors (fellow devs, potential users, or curious techies) while giving them everything they need to dive in. Below is a tailored README that matches the app’s futuristic flair and your project’s goals.
-Pixel Syndicate
-Pixel Syndicate Banner
+
 "Jack into the grid, runner. Forge your dream studio in a neon-drenched dystopia where tech deals burn bright and AR visions materialize."
 Welcome to Pixel Syndicate, the ultimate cyberpunk web app that fuses savage tech deals with mind-bending AR visualization. Built for the iPhone 16 Pro Max and beyond, this isn’t just a tool—it’s a portal to a digital underworld where you sculpt studio setups, hack them into reality, and dominate the creative grid. Think Tron meets The Matrix, with a dash of Nashville swagger.
 Features That Rip the Grid Apart
